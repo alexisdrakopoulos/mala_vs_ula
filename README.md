@@ -1,4 +1,4 @@
-# CNN project for Ising model generated via MCMC
+# Research Skills project
 
 TODO
 
