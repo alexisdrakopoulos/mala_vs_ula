@@ -2,7 +2,7 @@ import numpy as np
 from numba import jit
 
 @jit(nopython=True)
-def euler_maruyama_step(q, h, force, beta):
+def euler_maruyama(q, h, force, beta):
 	"""
 	Euler-Maruyama sampling scheme
 	"""
@@ -18,5 +18,5 @@ def random_walk_metropolis():
 
 
 @jit(nopython=True)
-def metropolis_adjusted_metropolis():
+def metropolis_adjusted_langevin():
 	pass
