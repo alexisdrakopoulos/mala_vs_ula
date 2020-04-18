@@ -2,7 +2,7 @@ import numpy as np
 from numba import jit
 
 @jit(nopython=True)
-def euler_maruyama(q, h, force, beta, U):
+def euler_maruyama(q, h, force, beta, U=None):
 	"""
 	Euler-Maruyama sampling scheme
 	"""
@@ -23,7 +23,7 @@ def metropolis_adjusted_langevin(q0, h, force, beta, U):
 	MALA sampling scheme
 	"""
 	
-	q_t = euler_maruyama(q0, h, force, beta, U)
+	q_t = euler_maruyama(q0, h, force, beta)
 
     	if np.random.uniform(0,1) < rho(q_t, U)/rho(q0, U):
         	return q_t
