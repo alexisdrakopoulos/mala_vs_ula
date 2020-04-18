@@ -25,10 +25,9 @@ def metropolis_adjusted_langevin(q0, h, force, beta, U):
 	
 	q_t = euler_maruyama(q0, h, force, beta)
 
-    	if np.random.uniform(0,1) < rho(q_t, U)/rho(q0, U):
-        	return q_t
-    
-    	return q0
+	if np.random.uniform(0,1) < rho(q_t, U)/rho(q0, U):
+		return q_t
+	return q0
 
 
 @jit(nopython=True)
@@ -37,4 +36,4 @@ def rho(q, U):
 	Unnormalized probability distribution used for the Metropolis-Hastings step in MALA
 	"""
 	
-        return np.exp(-U(q))
+	return np.exp(-U(q))
