@@ -46,7 +46,7 @@ def run_simulation(q0, N, h, beta, step_function, force, U=None, stepScheme=None
 	Run sampling simulation
 	
 	Args:
-	    U: The target distribution required for the metropolis hastings step in MALA.
+	    U: The target distribution required for the Metropolis-Hastings step in MALA.
 	"""
 	
     	q_traj = np.zeros((len(q0),N+1))
