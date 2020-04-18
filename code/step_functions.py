@@ -37,4 +37,4 @@ def rho(q):
 	Unnormalized probability distribution
 	"""
 	
-    return np.exp(-U(q))
+        return np.exp(-U(q))
