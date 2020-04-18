@@ -18,12 +18,12 @@ def random_walk_metropolis():
 
 
 @jit(nopython=True)
-def metropolis_adjusted_langevin(q0, h, force, beta, U, step_function=euler_maruyama):
+def metropolis_adjusted_langevin(q0, h, force, beta, U):
 	"""
 	MALA sampling scheme
 	"""
 	
-	q_t = step_function(q0, h, force, beta)
+	q_t = euler_maruyama(q0, h, force, beta, U)
 
     	if np.random.uniform(0,1) < rho(q_t, U)/rho(q0, U):
         	return q_t
