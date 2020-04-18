@@ -29,3 +29,12 @@ def metropolis_adjusted_langevin(q0, h, force, beta, step_function):
         	return q_t
     
     	return q0
+
+
+@jit(nopython=True)
+def rho(q):
+	"""
+	Unnormalized probability distribution
+	"""
+	
+    return np.exp(-U(q))
