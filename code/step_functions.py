@@ -46,6 +46,10 @@ def run_simulation(q0, N, h, beta, step_function, force, U=None, stepScheme=None
 	Run sampling simulation
 	
 	Args:
+	    q0: An n-dimensional list of initial starting values.
+	    M: Maximum number of steps.
+	    h: Step size.
+	    beta: Scaling factor?	     
 	    U: The target distribution required for the Metropolis-Hastings step in MALA.
 	"""
 	
