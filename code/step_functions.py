@@ -18,5 +18,14 @@ def random_walk_metropolis():
 
 
 @jit(nopython=True)
-def metropolis_adjusted_langevin():
-	pass
+def metropolis_adjusted_langevin(q0, h, force, beta, step_function):
+	"""
+	MALA sampling scheme
+	"""
+	
+	q_t = step_function(q0, h, force, beta)
+
+    	if np.random.uniform(0,1) < rho(q_t)/rho(q0):
+        	return q_t
+    
+    	return q0
