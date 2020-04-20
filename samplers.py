@@ -4,18 +4,10 @@ from tqdm import tqdm
 from code.step_functions import euler_maruyama
 from code.step_functions import random_walk_metropolis
 from code.step_functions import metropolis_adjusted_langevin
+from code.example_distributions import *
 
 
-@jit(nopython=True)
-def GaussianForce(q):
-    
-    # Force = -d_dq U(q)
-    # If U(q) = q^2/2, then...
-    f = -q 
-    return f
-
-
-@jit(nopython=True)
+#@jit(nopython=True)
 def run_simulation(q0, N, h, beta, step_function, force):
     """
     general function to run samplers from code.step_functions.py
@@ -41,14 +33,26 @@ def run_simulation(q0, N, h, beta, step_function, force):
 
     # now compute the steps
     for i in range(1, N+1):
-        q_traj[i] = step_function(q_traj[i-1], h, force, beta)
+        q_traj[i] = step_function(q=q_traj[i-1], h=h, force=force, beta=beta)
 
     return q_traj, t_traj
 
 
 if __name__ == "__main__":
-    q0 = np.zeros(1)
-    N = 100_000
-    q, t = run_simulation(q0, N, 0.1, 1, euler_maruyama, GaussianForce)
+
+    # run simulation
+    q0 = np.zeros(2)
+    q, t = run_simulation(q0, 100_000, 0.001, 1, metropolis_adjusted_langevin, force)
+
+    # plot
+    X,Y = np.meshgrid( np.linspace(-3,5,200) , np.linspace(-1,11,100) )
+    rho = np.exp(-U(np.array([X, Y])))
+
+    plt.figure()
+    plt.pcolor(X,Y,rho,vmin=0,vmax=1)
+    plt.scatter(q[:,0], q[:,1], s=1, color="red")
+    plt.xlim(-3, 5)
+    plt.ylim(-1, 11)
+    plt.show()
     print(q)
     print(q.shape)
