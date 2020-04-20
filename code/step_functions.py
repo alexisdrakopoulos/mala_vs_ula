@@ -2,6 +2,7 @@ import numpy as np
 from numba import jit
 from code.example_distributions import U
 
+
 #@jit(nopython=True)
 def euler_maruyama(q, h, force, beta=1):
 	"""
@@ -23,6 +24,7 @@ def random_walk_metropolis(q, h, force, U=U):
     if r < diff:
         return q_t
     return q
+
 
 
 #@jit(nopython=True)
