@@ -3,14 +3,15 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from numba import jit
 
-#@jit(nopython=True)
+
+@jit(nopython=True)
 def U(q, a=1/20, b=100):
     x = q[0]
     y = q[1]
     return ((1 - x)**2 + b*(y - x**2)**2)*a
 
 
-#@jit(nopython=True)
+@jit(nopython=True)
 def force(q, a=1/20, b=100):
     x = q[0]
     y = q[1]
